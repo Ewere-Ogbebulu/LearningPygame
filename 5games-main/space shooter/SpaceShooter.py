@@ -27,6 +27,8 @@ player = player_path.convert_alpha()
 
 stars = pygame.image.load(join('5games-main','space shooter','images', 'star.png')).convert_alpha()
 
+stars_pos = [(randint(0, WINDOW_W), randint(0, WINDOW_H)) for i in range(20)]
+
 #meteor
 
 meteor = pygame.image.load(join('5games-main','space shooter','images', 'meteor.png')).convert_alpha()
@@ -50,10 +52,9 @@ while running:
 
 
     #random stars
-    for i in range(20):
-        rand_x = randint(0, WINDOW_W)
-        rand_y = randint(0, WINDOW_H)
-        display_surface.blit(stars, (rand_x, rand_y))
+    for pos in stars_pos:
+       
+        display_surface.blit(stars, pos)
    
     
         
