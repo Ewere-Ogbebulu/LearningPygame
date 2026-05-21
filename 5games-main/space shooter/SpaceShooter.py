@@ -22,17 +22,19 @@ x =100
 
 #Player /image
 player = player_path.convert_alpha()
-
-#Stars image
+player_rect = player.get_frect(center = (WINDOW_W /2, WINDOW_H/2))
+player_direction = 1
 
 stars = pygame.image.load(join('5games-main','space shooter','images', 'star.png')).convert_alpha()
-
 stars_pos = [(randint(0, WINDOW_W), randint(0, WINDOW_H)) for i in range(20)]
 
-#meteor
+
 
 meteor = pygame.image.load(join('5games-main','space shooter','images', 'meteor.png')).convert_alpha()
+meteor_rect = meteor.get_frect(center = (WINDOW_W /2, WINDOW_H/2))
 
+laser = pygame.image.load(join('5games-main','space shooter','images', 'laser.png')).convert_alpha()
+laser_rect = laser.get_frect(bottomleft = (20,WINDOW_H -20))
 
 
 
@@ -46,18 +48,22 @@ while running:
     # Draw game
     display_surface.fill("dark grey")
 
-    
-    x += 0.6
-    display_surface.blit(player, (x, 100))
-
-
     #random stars
     for pos in stars_pos:
-       
-        display_surface.blit(stars, pos)
-   
+       display_surface.blit(stars, pos)
+
+    display_surface.blit(meteor, meteor_rect)
+
+    display_surface.blit(laser, laser_rect)
     
-        
+    player_rect.x += player_direction *0.4
+    if player_rect.right >= WINDOW_W or player_rect.left < 0:
+         player_direction *= -1
+    display_surface.blit(player, player_rect)
+    
+    
+
+
     pygame.display.update()
             
 
